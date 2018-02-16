@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import es.ntun.customerlistscreener.customer.Customer;
+import es.ntun.customerlistscreener.customer.EarthPoint;
 
 public class TestCustomerParsing {
 
@@ -26,10 +27,8 @@ public class TestCustomerParsing {
 
 		assertThat(json.get(ID_KEY).getAsInt(), equalTo(customer.getId()));
 		assertThat(json.get(NAME_KEY).getAsString(), equalTo(customer.getName()));
-		assertThat(json.get(LATITUDE_KEY).getAsDouble(),
-		           equalTo(Math.toDegrees(customer.getLatitude())));
-		assertThat(json.get(LONGITUDE_KEY).getAsDouble(),
-		           equalTo(Math.toDegrees(customer.getLongitude())));
+		EarthPoint readBack = new EarthPoint(json.get(LATITUDE_KEY).getAsDouble(), json.get(LONGITUDE_KEY).getAsDouble());
+		assertThat(readBack, equalTo(customer.getLocation()));
 	}
 
 	@Test
@@ -45,8 +44,7 @@ public class TestCustomerParsing {
 
 		assertThat(actual.getId(), equalTo(expected.getId()));
 		assertThat(actual.getName(), equalTo(expected.getName()));
-		assertThat(actual.getLatitude(), equalTo(expected.getLatitude()));
-		assertThat(actual.getLongitude(), equalTo(expected.getLongitude()));
+		assertThat(actual.getLocation(), equalTo(expected.getLocation()));
 	}
 
 }
