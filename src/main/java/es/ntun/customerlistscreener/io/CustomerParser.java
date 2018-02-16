@@ -21,17 +21,21 @@ public class CustomerParser implements JsonDeserializer<Customer>, JsonSerialize
 	@Override
 	public Customer deserialize(JsonElement json, Type type,
 	                            JsonDeserializationContext context) throws JsonParseException {
-		return new Customer(0, "", 0, 0);
+		JsonObject customer = json.getAsJsonObject();
+
+		return new Customer(customer.get(ID_KEY).getAsInt(), customer.get(NAME_KEY).getAsString(),
+		                    new EarthPoint(customer.get(LATITUDE_KEY).getAsDouble(),
+		                                   customer.get(LONGITUDE_KEY).getAsDouble()));
 	}
 
 	@Override
 	public JsonElement serialize(Customer customer, Type type, JsonSerializationContext context) {
 		JsonObject json = new JsonObject();
 		
-		json.addProperty(ID_KEY, 0);
-		json.addProperty(NAME_KEY, "");
-		json.addProperty(LATITUDE_KEY, 0);
-		json.addProperty(LONGITUDE_KEY, 0);
+		json.addProperty(ID_KEY, customer.getId());
+		json.addProperty(NAME_KEY, customer.getName());
+		json.addProperty(LATITUDE_KEY, Math.toDegrees(customer.getLatitude()));
+		json.addProperty(LONGITUDE_KEY, Math.toDegrees(customer.getLongitude()));
 
 		return json;
 	}
