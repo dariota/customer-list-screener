@@ -11,7 +11,7 @@ import org.junit.Test;
 // all distances in metres
 public class EarthPointTests {
 
-	private static final double TOLERABLE_ERROR = 10;
+	private static final double TOLERABLE_ERROR = 5;
 
 	@Test
 	public void distanceTo_result_should_approximate_precomputed_result() {

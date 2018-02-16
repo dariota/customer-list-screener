@@ -69,9 +69,7 @@ public class EarthPoint {
 		return true;
 	}
 
-	// checks that these are about as close as possible due to small errors
-	// reading/writing to a non-binary representation
 	private static boolean approximatelyEqual(double a, double b) {
-		return Math.abs(a - b) <= Math.ulp(Math.max(a, b));
+		return Math.abs(a - b) <= 6E-6;
 	}
 }
