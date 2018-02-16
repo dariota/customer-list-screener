@@ -1,4 +1,4 @@
-package es.ntun.customerlistscreener;
+package es.ntun.customerlistscreener.customer;
 
 import static es.ntun.customerlistscreener.TestHelper.generateCoordinate;
 import static es.ntun.customerlistscreener.TestHelper.generateLocation;

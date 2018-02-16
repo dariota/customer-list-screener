@@ -1,7 +1,5 @@
 package es.ntun.customerlistscreener.customer;
 
-import es.ntun.customerlistscreener.EarthPoint;
-
 public class Customer {
 
 	private int id;

@@ -1,4 +1,4 @@
-package es.ntun.customerlistscreener;
+package es.ntun.customerlistscreener.customer;
 
 public class EarthPoint {
 

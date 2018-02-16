@@ -8,8 +8,8 @@ import org.hamcrest.Matcher;
 
 import com.github.javafaker.Faker;
 
-import es.ntun.customerlistscreener.EarthPoint;
 import es.ntun.customerlistscreener.customer.Customer;
+import es.ntun.customerlistscreener.customer.EarthPoint;
 
 public class TestHelper {
 
@@ -20,7 +20,7 @@ public class TestHelper {
 		void run() throws Throwable;
 	}
 
-	protected static <T extends Throwable> Matcher<ThrowingRunnable> throwsA(Class<T> exceptionClass) {
+	public static <T extends Throwable> Matcher<ThrowingRunnable> throwsA(Class<T> exceptionClass) {
 		return new BaseMatcher<ThrowingRunnable>() {
 			private static final String ERROR_DESCRIPTION = "an exception of type %s";
 			private Throwable lastThrown;

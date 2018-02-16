@@ -12,8 +12,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import es.ntun.customerlistscreener.EarthPoint;
 import es.ntun.customerlistscreener.customer.Customer;
+import es.ntun.customerlistscreener.customer.EarthPoint;
 
 public class CustomerParser implements JsonDeserializer<Customer>, JsonSerializer<Customer> {
 
