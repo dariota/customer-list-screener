@@ -1,15 +1,15 @@
 package es.ntun.customerlistscreener.customer;
 
-import static es.ntun.customerlistscreener.TestHelper.generateCoordinate;
-import static es.ntun.customerlistscreener.TestHelper.generateLocation;
-import static es.ntun.customerlistscreener.TestHelper.throwsA;
+import static es.ntun.customerlistscreener.Helper.generateCoordinate;
+import static es.ntun.customerlistscreener.Helper.generateLocation;
+import static es.ntun.customerlistscreener.Helper.throwsA;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
 import org.junit.Test;
 
 // all distances in metres
-public class EarthPointTests {
+public class TestEarthPoint {
 
 	private static final double TOLERABLE_ERROR = 5;
 

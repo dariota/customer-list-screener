@@ -1,6 +1,6 @@
 package es.ntun.customerlistscreener.io;
 
-import static es.ntun.customerlistscreener.TestHelper.generateCustomer;
+import static es.ntun.customerlistscreener.Helper.generateCustomer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 
 import es.ntun.customerlistscreener.customer.Customer;
 
-public class CustomerParsingTests {
+public class TestCustomerParsing {
 
 	private static final String ID_KEY = "user_id", NAME_KEY = "name", LATITUDE_KEY = "latitude",
 	        LONGITUDE_KEY = "longitude";

@@ -1,8 +1,8 @@
 package es.ntun.customerlistscreener.customer;
 
-import static es.ntun.customerlistscreener.TestHelper.generateCustomerList;
-import static es.ntun.customerlistscreener.TestHelper.generateLocation;
-import static es.ntun.customerlistscreener.TestHelper.throwsA;
+import static es.ntun.customerlistscreener.Helper.generateCustomerList;
+import static es.ntun.customerlistscreener.Helper.generateLocation;
+import static es.ntun.customerlistscreener.Helper.throwsA;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import org.hamcrest.comparator.ComparatorMatcherBuilder;
 import org.junit.Test;
 
-public class CustomerTests {
+public class TestCustomer {
 
 	@Test
 	public void constructor_should_throw_illegal_argument_exception_if_given_null_location_or_name() {

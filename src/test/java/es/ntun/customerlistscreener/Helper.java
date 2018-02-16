@@ -12,7 +12,7 @@ import com.github.javafaker.Faker;
 import es.ntun.customerlistscreener.customer.Customer;
 import es.ntun.customerlistscreener.customer.EarthPoint;
 
-public class TestHelper {
+public class Helper {
 
 	private static Random random = new Random();
 	private static Faker faker = new Faker();

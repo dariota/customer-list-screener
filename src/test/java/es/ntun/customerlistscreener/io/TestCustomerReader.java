@@ -1,6 +1,6 @@
 package es.ntun.customerlistscreener.io;
 
-import static es.ntun.customerlistscreener.TestHelper.generateCustomer;
+import static es.ntun.customerlistscreener.Helper.generateCustomer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 
 import es.ntun.customerlistscreener.customer.Customer;
 
-public class CustomerReaderTests {
+public class TestCustomerReader {
 
 	private static class CustomerFileInfo {
 		public File customerFile;

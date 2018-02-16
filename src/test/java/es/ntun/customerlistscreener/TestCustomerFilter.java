@@ -1,7 +1,7 @@
 package es.ntun.customerlistscreener;
 
-import static es.ntun.customerlistscreener.TestHelper.generateCustomerList;
-import static es.ntun.customerlistscreener.TestHelper.generateLocation;
+import static es.ntun.customerlistscreener.Helper.generateCustomerList;
+import static es.ntun.customerlistscreener.Helper.generateLocation;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIn.in;
@@ -16,7 +16,7 @@ import org.junit.Test;
 import es.ntun.customerlistscreener.customer.Customer;
 import es.ntun.customerlistscreener.customer.EarthPoint;
 
-public class CustomerFilterTests {
+public class TestCustomerFilter {
 
 	@Test
 	public void filter_should_return_customers_if_and_only_if_they_are_within_distance() {
