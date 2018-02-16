@@ -39,7 +39,10 @@ public class EarthPoint {
 		double cosLatitudeLongitudeProduct = Math.cos(latitude) * Math.cos(other.latitude)
 		                                     * Math.cos(deltaLongitude);
 
-		double centralAngle = Math.acos(sinLatitudeProduct + cosLatitudeLongitudeProduct);
+		// floating point error leads to this sum being a tiny bit above 1, which
+		// creates NaN
+		double centralAngle = Math.acos(Math.min(sinLatitudeProduct + cosLatitudeLongitudeProduct,
+		                                         1));
 
 		return EARTH_RADIUS_M * centralAngle;
 	}

@@ -39,9 +39,12 @@ public class TestEarthPoint {
 
 	@Test
 	public void distanceTo_self_should_approximate_zero() {
-		EarthPoint randomLocation = generateLocation();
+		// run this test a load of times to catch an issue with floating point error
+		for (int i = 0; i < 10000; i++) {
+			EarthPoint randomLocation = generateLocation();
 
-		assertThat(randomLocation.distanceTo(randomLocation), closeTo(0, TOLERABLE_ERROR));
+			assertThat(randomLocation.distanceTo(randomLocation), closeTo(0, TOLERABLE_ERROR));
+		}
 	}
 
 	@Test
@@ -69,7 +72,7 @@ public class TestEarthPoint {
 		checkConstructorWith(Double.NEGATIVE_INFINITY);
 		checkConstructorWith(Double.POSITIVE_INFINITY);
 	}
-	
+
 	private static void checkConstructorWith(double input) {
 		assertThat(() -> new EarthPoint(input, input), throwsA(IllegalArgumentException.class));
 		assertThat(() -> new EarthPoint(input, 0), throwsA(IllegalArgumentException.class));
