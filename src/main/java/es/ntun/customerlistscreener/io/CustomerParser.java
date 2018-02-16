@@ -25,9 +25,11 @@ public class CustomerParser implements JsonDeserializer<Customer>, JsonSerialize
 	                            JsonDeserializationContext context) throws JsonParseException {
 		JsonObject customer = json.getAsJsonObject();
 
-		return new Customer(customer.get(ID_KEY).getAsInt(), customer.get(NAME_KEY).getAsString(),
-		                    new EarthPoint(customer.get(LATITUDE_KEY).getAsDouble(),
-		                                   customer.get(LONGITUDE_KEY).getAsDouble()));
+		return new Customer(getKeyAggressive(customer, ID_KEY).getAsInt(),
+		                    getKeyAggressive(customer, NAME_KEY).getAsString(),
+		                    new EarthPoint(getKeyAggressive(customer, LATITUDE_KEY).getAsDouble(),
+		                                   getKeyAggressive(customer,
+		                                                    LONGITUDE_KEY).getAsDouble()));
 	}
 
 	@Override
@@ -40,6 +42,17 @@ public class CustomerParser implements JsonDeserializer<Customer>, JsonSerialize
 		json.addProperty(LONGITUDE_KEY, Math.toDegrees(customer.getLongitude()));
 
 		return json;
+	}
+
+	private static JsonElement getKeyAggressive(JsonObject object,
+	                                            String key) throws JsonParseException {
+		JsonElement element = object.get(key);
+
+		if (element != null) {
+			return element;
+		} else {
+			throw new JsonParseException("Needed " + key + " but was not present");
+		}
 	}
 
 	public static Gson getCustomerParsingGson() {

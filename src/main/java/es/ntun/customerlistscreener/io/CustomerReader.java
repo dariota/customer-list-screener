@@ -13,6 +13,10 @@ public class CustomerReader {
 
 	// Avoid slurping so we can handle huge files
 	public static Iterable<Customer> readCustomersFromFile(File file) throws FileNotFoundException {
+		if (file == null) {
+			throw new IllegalArgumentException("Customer file must not be null");
+		}
+
 		Gson gson = CustomerParser.getCustomerParsingGson();
 		Scanner s = new Scanner(file);
 

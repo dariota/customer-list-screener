@@ -1,9 +1,11 @@
 package es.ntun.customerlistscreener.io;
 
 import static es.ntun.customerlistscreener.Helper.generateCustomer;
+import static es.ntun.customerlistscreener.Helper.throwsA;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
+import static org.hamcrest.collection.IsEmptyIterable.emptyIterable;
 import static org.hamcrest.collection.IsIn.in;
 import static org.hamcrest.number.OrderingComparison.lessThan;
 
@@ -79,6 +81,21 @@ public class TestCustomerReader {
 		}
 
 		assertThat(customerCopy, empty());
+	}
+
+	@Test
+	public void passing_null_file_should_throw_illegal_argument_exception() {
+		assertThat(() -> CustomerReader.readCustomersFromFile(null),
+		           throwsA(IllegalArgumentException.class));
+	}
+
+	@Test
+	public void passing_empty_file_should_produce_empty_iterable() throws IOException {
+		customerFile = File.createTempFile("emptyCustomers", ".json");
+
+		Iterable<Customer> emptyIterable = CustomerReader.readCustomersFromFile(customerFile);
+
+		assertThat(emptyIterable, emptyIterable());
 	}
 
 	private static long getApproximateMemoryUsage() {

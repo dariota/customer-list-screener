@@ -64,7 +64,20 @@ public class TestEarthPoint {
 	}
 
 	@Test
-	public void passing_null_to_distanceTo_should_throw_IllegalArgumentException() {
+	public void passing_nan_or_inf_to_constructor_should_throw_illegal_argument_exception() {
+		checkConstructorWith(Double.NaN);
+		checkConstructorWith(Double.NEGATIVE_INFINITY);
+		checkConstructorWith(Double.POSITIVE_INFINITY);
+	}
+	
+	private static void checkConstructorWith(double input) {
+		assertThat(() -> new EarthPoint(input, input), throwsA(IllegalArgumentException.class));
+		assertThat(() -> new EarthPoint(input, 0), throwsA(IllegalArgumentException.class));
+		assertThat(() -> new EarthPoint(0, input), throwsA(IllegalArgumentException.class));
+	}
+
+	@Test
+	public void passing_null_to_distanceTo_should_throw_illegal_argument_exception() {
 		EarthPoint nullIsland = new EarthPoint(0, 0);
 
 		assertThat(() -> nullIsland.distanceTo(null), throwsA(IllegalArgumentException.class));

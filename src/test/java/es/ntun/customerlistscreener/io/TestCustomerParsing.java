@@ -1,13 +1,16 @@
 package es.ntun.customerlistscreener.io;
 
 import static es.ntun.customerlistscreener.Helper.generateCustomer;
+import static es.ntun.customerlistscreener.Helper.throwsA;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 
+import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 
 import es.ntun.customerlistscreener.customer.Customer;
 import es.ntun.customerlistscreener.customer.EarthPoint;
@@ -18,6 +21,7 @@ public class TestCustomerParsing {
 	        LONGITUDE_KEY = "longitude";
 
 	private Gson gson = CustomerParser.getCustomerParsingGson();
+	private Faker faker = new Faker();
 
 	@Test
 	public void customer_to_json_should_keep_all_fields_correctly() {
@@ -45,6 +49,14 @@ public class TestCustomerParsing {
 		assertThat(actual.getId(), equalTo(expected.getId()));
 		assertThat(actual.getName(), equalTo(expected.getName()));
 		assertThat(actual.getLocation(), equalTo(expected.getLocation()));
+	}
+	
+	@Test
+	public void invalid_json_for_customer_should_throw_json_parse_exception() {
+		JsonObject json = new JsonObject();
+		json.addProperty(ID_KEY, faker.number().numberBetween(0, 10000));
+		
+		assertThat(() -> gson.fromJson(json.toString(), Customer.class), throwsA(JsonParseException.class));
 	}
 
 }

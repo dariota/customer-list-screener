@@ -8,6 +8,10 @@ public class EarthPoint {
 	private double latitude, longitude;
 
 	public EarthPoint(double latitudeDec, double longitudeDec) {
+		if (!(Double.isFinite(latitudeDec) && Double.isFinite(longitudeDec))) {
+			throw new IllegalArgumentException("Latitude/Longitude must be finite");
+		}
+
 		latitude = Math.toRadians(latitudeDec);
 		longitude = Math.toRadians(longitudeDec);
 	}
