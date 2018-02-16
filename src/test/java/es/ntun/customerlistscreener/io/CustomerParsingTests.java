@@ -4,11 +4,9 @@ import static es.ntun.customerlistscreener.TestHelper.generateCustomer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import es.ntun.customerlistscreener.customer.Customer;
@@ -18,14 +16,7 @@ public class CustomerParsingTests {
 	private static final String ID_KEY = "user_id", NAME_KEY = "name", LATITUDE_KEY = "latitude",
 	        LONGITUDE_KEY = "longitude";
 
-	private Gson gson;
-
-	@Before
-	public void setUp() {
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(Customer.class, new CustomerParser());
-		gson = builder.create();
-	}
+	private Gson gson = CustomerParser.getCustomerParsingGson();
 
 	@Test
 	public void customer_to_json_should_keep_all_fields_correctly() {
