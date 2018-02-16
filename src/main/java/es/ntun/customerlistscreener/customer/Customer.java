@@ -1,12 +1,16 @@
 package es.ntun.customerlistscreener.customer;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
 
 	private int id;
 	private String name;
 	private EarthPoint location;
 
 	public Customer(int id, String name, EarthPoint location) {
+		if (name == null || location == null) {
+			throw new IllegalArgumentException("Name and location are required");
+		}
+
 		this.id = id;
 		this.name = name;
 		this.location = location;
@@ -72,5 +76,16 @@ public class Customer {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(Customer o) {
+		if (id > o.id) {
+			return 1;
+		} else if (id < o.id) {
+			return -1;
+		} else {
+			return name.compareTo(o.name);
+		}
 	}
 }
