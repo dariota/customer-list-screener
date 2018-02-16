@@ -1,5 +1,6 @@
 package es.ntun.customerlistscreener;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.hamcrest.BaseMatcher;
@@ -72,5 +73,14 @@ public class TestHelper {
 
 	public static Customer generateCustomer() {
 		return new Customer(random.nextInt(), faker.name().fullName(), generateLocation());
+	}
+
+	public static ArrayList<Customer> generateCustomerList(int customerCount) {
+		ArrayList<Customer> allCustomers = new ArrayList<>(customerCount);
+		for (int i = 0; i < customerCount; i++) {
+			allCustomers.add(generateCustomer());
+		}
+
+		return allCustomers;
 	}
 }

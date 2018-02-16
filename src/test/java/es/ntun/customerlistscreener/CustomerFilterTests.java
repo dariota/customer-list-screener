@@ -1,6 +1,6 @@
 package es.ntun.customerlistscreener;
 
-import static es.ntun.customerlistscreener.TestHelper.generateCustomer;
+import static es.ntun.customerlistscreener.TestHelper.generateCustomerList;
 import static es.ntun.customerlistscreener.TestHelper.generateLocation;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
@@ -20,7 +20,7 @@ public class CustomerFilterTests {
 
 	@Test
 	public void filter_should_return_customers_if_and_only_if_they_are_within_distance() {
-		ArrayList<Customer> allCustomers = generateCustomerList();
+		ArrayList<Customer> allCustomers = generateCustomerList(100);
 		EarthPoint randomLocation = generateLocation();
 		// ensure we get at least one back
 		double distance = randomLocation.distanceTo(allCustomers.get(0).getLocation()) + 1;
@@ -46,7 +46,7 @@ public class CustomerFilterTests {
 
 	@Test
 	public void filter_should_return_empty_if_given_negative_distance() {
-		ArrayList<Customer> allCustomers = generateCustomerList();
+		ArrayList<Customer> allCustomers = generateCustomerList(100);
 		EarthPoint location = allCustomers.get(0).getLocation();
 
 		assertThat(CustomerFilter.findCustomersWithinOf(allCustomers, -0.01, location), empty());
@@ -54,23 +54,12 @@ public class CustomerFilterTests {
 
 	@Test
 	public void filter_should_return_empty_if_given_null() {
-		ArrayList<Customer> allCustomers = generateCustomerList();
+		ArrayList<Customer> allCustomers = generateCustomerList(100);
 		EarthPoint location = allCustomers.get(0).getLocation();
 
 		assertThat(CustomerFilter.findCustomersWithinOf(null, Double.MAX_VALUE, location), empty());
 		assertThat(CustomerFilter.findCustomersWithinOf(allCustomers, Double.MAX_VALUE, null),
 		           empty());
-	}
-
-	private static ArrayList<Customer> generateCustomerList() {
-		int customerCount = 100;
-
-		ArrayList<Customer> allCustomers = new ArrayList<>(customerCount);
-		for (int i = 0; i < customerCount; i++) {
-			allCustomers.add(generateCustomer());
-		}
-
-		return allCustomers;
 	}
 
 }
