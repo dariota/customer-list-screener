@@ -28,6 +28,10 @@ public class Customer {
 		return location.getLongitude();
 	}
 
+	public EarthPoint getLocation() {
+		return location;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
