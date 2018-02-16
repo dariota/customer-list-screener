@@ -39,4 +39,39 @@ public class EarthPoint {
 
 		return EARTH_RADIUS_M * centralAngle;
 	}
+
+	@Override
+	// this is obviously a terrible hash, but the representation of doubles and
+	// serialisation/deserialisation to decimal makes a sensible hash that still
+	// matches for doubles of equivalent value hard
+	public int hashCode() {
+		return 1;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		EarthPoint other = (EarthPoint) obj;
+		if (!approximatelyEqual(latitude, other.latitude)) {
+			return false;
+		}
+		if (!approximatelyEqual(longitude, other.longitude)) {
+			return false;
+		}
+		return true;
+	}
+
+	// checks that these are about as close as possible due to small errors
+	// reading/writing to a non-binary representation
+	private static boolean approximatelyEqual(double a, double b) {
+		return Math.abs(a - b) <= Math.ulp(Math.max(a, b));
+	}
 }
